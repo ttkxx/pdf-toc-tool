@@ -1,17 +1,29 @@
-## pdf-toc-creator
-为PDF文档创建目录
+# 指定PDF生成目录
 
+在指定**无目录**PDF文件中生成目录
+
+基于 [pdf-toc-creator](https://github.com/kingcent/pdf-toc-creator)
 
 ## 用法
-### 参数说明
-- offset, 实际pdf文件中的页码应该比toc文件中指定的页码偏移多少，正整数表示pdf文件中页码更大
-- toc, 指定PDF标签的文件
 
-### toc文件格式说明：
-- 一行产生一个目录标签，以左边tab缩进表示目录层级(必须是tab)
-- 页码在每行最后，用半角分号分隔
+### 参数
 
-## 用例
+- `-f` 文件路径
+- `-o` offset 页码偏移量： 实际页码（从1开始编号） - 书籍页码
+- `-t` toc PDF目录标签路径
+
+### PDF目录标签
+
+每行一条目录标签，每条标签描述一条目录
+
+标签格式：
+
+`层级 标题; 书籍页码`
+
+- 通过tab缩进表示目录层级
+
+## 示例
+
 ```
-python pdf-toc-creator.py -f InfoQ-2020中国技术发展白皮书.pdf -o 3 -t toc-infoq.txt
+python pdf-toc-creator.py -f InfoQ-2020中国技术发展白皮书.pdf -o 4 -t toc-infoq.txt
 ```

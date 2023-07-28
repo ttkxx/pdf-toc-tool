@@ -68,10 +68,17 @@ def main(argv):
         # pageNo = (line.split(';')[1]).strip() + offset
         print("----------")
         
-        print((line.split(';')[1]).strip())
-        print(line)
+        # print((line.split(';')[1]).strip())
+        print(f'TOC description: {line}')
+        print(f'Book page number: {(line.split(";")[1]).strip()}')
+        
+        
+        
+        pageNo = int((line.split(';')[1]).strip()) + offset - 1
+        print(f'Actual page number in human readable {pageNo+1}')
+        print(f'Actual page number in code: {pageNo}')
+        # print(pageNo)
         print("----------")
-        pageNo = int((line.split(';')[1]).strip()) + offset
         parent = parentsBookmark[tabCnt - 1] if tabCnt > 0 else None
         parentsBookmark[tabCnt] = pdfWriter.addBookmark(title, pageNo, parent)
         # parentsBookmark[tabCnt] = pdfWriter.addBookmark(title.decode('utf-8'), pageNo, parent)
