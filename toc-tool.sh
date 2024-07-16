@@ -11,15 +11,22 @@ offset=$2
 toc_path=$3
 flag=$4
 
+# echo $arg_num
+# echo $file_path
+# echo $offset
+# echo $toc_path
+# echo $flag
+
 if [[ $arg_num = 4 && "$flag" == "--delete" ]];then
-    # delete toc --> create toc
+    ## delete toc --> create toc
     processed_file_path=${file_path%.pdf}_toc-deleted.pdf
     cd $DELETETOOLRELATIVEPATH
-    mvn clean compile exec:exec -Dexec.executable="java" -Dexec.args=" -classpath %classpath my.tool.pdf.App $file_path $processed_file_path" 
+    # echo $processed_file_path
+    mvn clean compile exec:exec -Dexec.executable="java" -Dexec.args=" -classpath %classpath my.tool.pdf.App '$file_path' '$processed_file_path'"  
     cd $SHELLDIR
-    python3 $CREATETOOLRELATIVEPATH -f $processed_file_path -o $offset -t $toc_path
-    rm -fr $processed_file_path
+    python3 $CREATETOOLRELATIVEPATH -f "$processed_file_path" -o "$offset" -t "$toc_path"
+    rm -fr "$processed_file_path"
 else
     # create toc
-    python3 $CREATETOOLRELATIVEPATH -f $file_path -o $offset -t $toc_path 
+    python3 $CREATETOOLRELATIVEPATH -f "$file_path" -o "$offset" -t "$toc_path" 
 fi;
